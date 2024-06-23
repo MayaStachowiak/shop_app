@@ -5,15 +5,18 @@ import com.example.shop.mapper.UserMapper;
 import com.example.shop.model.dao.User;
 import com.example.shop.model.dto.UserDto;
 import com.example.shop.service.UserService;
+import com.example.shop.validator.group.Create;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/users")
 @RequiredArgsConstructor
+@Validated
 public class UserController {
 
     private final UserService userService;
@@ -26,6 +29,7 @@ public class UserController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @Validated(Create.class)
     public UserDto saveUser(@RequestBody @Valid UserDto user) {
         User userToSave = userService.save(userMapper.map(user));
         return userMapper.map(userToSave);

@@ -1,14 +1,16 @@
 package com.example.shop.model.dto;
 
+import com.example.shop.validator.PasswordValidator;
+import com.example.shop.validator.group.Create;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
 import lombok.Builder;
 import org.hibernate.validator.constraints.Length;
 
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@PasswordValidator(groups = Create.class)
 public record UserDto(
         @NotBlank
 //        @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#\\$%\\^&\\*])(?=.{8,})",
