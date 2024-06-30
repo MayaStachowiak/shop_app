@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @RestControllerAdvice
 @Slf4j
@@ -24,14 +25,14 @@ public class AdviceController {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public List<FieldErrorDto> handleMethodArgumentNotValidException(MethodArgumentNotValidException methodArgumentNotValidException) {
+    public Set<FieldErrorDto> handleMethodArgumentNotValidException(MethodArgumentNotValidException methodArgumentNotValidException) {
         log.warn("Bad user data", methodArgumentNotValidException);
 
         return methodArgumentNotValidException.getAllErrors().stream()
                 .map(o -> FieldErrorDto.builder()
                         .fieldName(((FieldError) o).getField())
-                        .massage(o.getDefaultMessage())
+                        .message(o.getDefaultMessage())
                         .build())
-                .toList();
+                .collect(Collectors.toSet());
     }
 }
