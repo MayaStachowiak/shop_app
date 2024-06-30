@@ -1,0 +1,3 @@
+INSERT into user(user_name, first_name, last_name, email, phone_number, password) VALUES('Jadzia', 'Jadzia', 'Jadzia', 'jadzia@gmail.com', '666555444', '1');
+INSERT into user(user_name, first_name, last_name, email, phone_number, password) VALUES('Zdzisiek', 'Zdzisiek', 'Zdzisiek', 'zdzisiek@gmail.com', '777555444', '2');
+INSERT into user(user_name, first_name, last_name, email, phone_number, password) VALUES('Waldek', 'Waldek', 'Waldek', 'waldek@gmail.com', '888555444', '3');
